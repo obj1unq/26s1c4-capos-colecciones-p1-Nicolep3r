@@ -1,24 +1,46 @@
+import castillo.*
 object rolando {
-    const artefactos = #{}
-    var limite = 2
+    const mochila = []
+    const encuentros = []
+    var property capacidadMaxima = 2
 
 
 
-method artefactos() = artefactos
+method mochila() = mochila
+method encuentros() = encuentros
+
+method recolectar(artefacto) {
+  if(not self.hayLugar()){
+        self.error("No tengo lugar en la mochila!")
+    }
+    mochila.add(artefacto)
+}
 
 method encontrar(artefacto) {
-    if(self.hayEspacio()){
-        artefactos.add(artefacto)
+    encuentros.add(artefacto)
+
+    if(self.hayLugar()){
+        self.recolectar(artefacto)
     }
+    
 }
 
-method hayEspacio() {
-  return artefactos.size() < limite
+
+
+method cantArtefactosRecolectados() = mochila.size() // de consulta
+
+method hayLugar() = self.cantArtefactosRecolectados() < capacidadMaxima // de consulta
+
+method llegarACastillo() {
+    // mochila.forEach({artefacto =>  castilloDePiedra.guardarArtefacto(artefacto)})
+    castilloDePiedra.guardarArtefacto(mochila)
+    mochila.clear()
 }
 
-method limite(_limite){
-    limite = _limite
-}
+method artefactosEnPosesion() =
+    self.mochila() + castilloDePiedra.artefactosAlmacenados()
+
+
 
 }
 /*
@@ -31,17 +53,10 @@ method limite(_limite){
 
 */
 
-object espada(){
+object espada {}
 
-}
+object libro {}
 
-object libro(){
-}
+object collar {}
 
-object collar(){
-
-}
-
-object armadura(){
-
-}
+object armadura {}
