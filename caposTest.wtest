@@ -7,7 +7,7 @@ describe "Rolando"{
         rolando.encontrar(espada)
 
         assert.that(rolando.mochila().contains(espada))
-        assert.equals([espada], rolando.encuentros())
+        assert.equals([espada], rolando.encuentroDeArtefactos())
 
     }
 
@@ -16,7 +16,7 @@ describe "Rolando"{
       rolando.encontrar(libro)
       rolando.encontrar(collar) 
       assert.notThat(rolando.mochila().contains(collar))
-      assert.equals([espada, libro, collar], rolando.encuentros())
+      assert.equals([espada, libro, collar], rolando.encuentroDeArtefactos())
       assert.equals(#{espada, libro}, rolando.mochila())
     }
     

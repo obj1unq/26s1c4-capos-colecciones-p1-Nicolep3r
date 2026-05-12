@@ -8,7 +8,7 @@ object rolando {
 
 
 method mochila() = mochila
-method encuentros() = encuentros
+method encuentroDeArtefactos() = encuentros
 method artefactosEnCastillo() = castilloDeRolando.artefactosAlmacenados()
 
 
