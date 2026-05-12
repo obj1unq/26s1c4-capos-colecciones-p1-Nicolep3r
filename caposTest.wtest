@@ -1,0 +1,51 @@
+import castillo.*
+import capos.*
+
+describe "Rolando"{
+
+    test "Encuentra y recolecta" {
+        rolando.encontrar(espada)
+
+        assert.that(rolando.mochila().contains(espada))
+        assert.equals([espada], rolando.encuentroDeArtefactos())
+
+    }
+
+    test "Encuentra y no recolecta" {
+      rolando.encontrar(espada)
+      rolando.encontrar(libro)
+      rolando.encontrar(collar) 
+      assert.notThat(rolando.mochila().contains(collar))
+      assert.equals([espada, libro, collar], rolando.encuentroDeArtefactos())
+      assert.equals(#{espada, libro}, rolando.mochila())
+    }
+    
+    test "Rolando recolecta dos objetos y los guarda en castilloDePiedra" {
+      rolando.encontrar(espada)
+      rolando.encontrar(libro)
+      rolando.llegarACastillo()
+
+      assert.equals(#{espada, libro}, castilloDePiedra.artefactosAlmacenados())
+      assert.equals(#{}, rolando.mochila())
+    }
+
+    test "Rolando guarda dos veces en castilloDePiedra" {
+        rolando.encontrar(espada)
+        rolando.encontrar(libro)
+        rolando.llegarACastillo()
+        rolando.encontrar(collar)
+        rolando.llegarACastillo()
+        assert.equals(#{espada, libro, collar}, castilloDePiedra.artefactosAlmacenados())
+        assert.equals(#{}, rolando.mochila())
+        assert.equals(3, castilloDePiedra.artefactosAlmacenados().size())
+        assert.that(castilloDePiedra.artefactosAlmacenados().contains(collar))
+    }
+
+    test "Posesion de tres artefactos" {
+        rolando.encontrar(espada)
+        rolando.encontrar(libro)
+        rolando.llegarACastillo()
+        rolando.encontrar(collar)
+        assert.equals(#{espada,libro,collar}, rolando.artefactosEnPosesion())
+    }
+}
