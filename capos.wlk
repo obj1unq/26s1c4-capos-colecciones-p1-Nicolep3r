@@ -1,6 +1,7 @@
 import castillo.*
 object rolando {
-    const mochila = []
+    const castilloDeRolando = castilloDePiedra
+    const mochila = #{}
     const encuentros = []
     var property capacidadMaxima = 2
 
@@ -8,6 +9,10 @@ object rolando {
 
 method mochila() = mochila
 method encuentros() = encuentros
+method artefactosEnCastillo() = castilloDeRolando.artefactosAlmacenados()
+
+
+
 
 method recolectar(artefacto) {
   if(not self.hayLugar()){
@@ -25,21 +30,19 @@ method encontrar(artefacto) {
     
 }
 
-
-
 method cantArtefactosRecolectados() = mochila.size() // de consulta
 
 method hayLugar() = self.cantArtefactosRecolectados() < capacidadMaxima // de consulta
 
 method llegarACastillo() {
     // mochila.forEach({artefacto =>  castilloDePiedra.guardarArtefacto(artefacto)})
-    castilloDePiedra.guardarArtefacto(mochila)
+    castilloDeRolando.guardarArtefacto(mochila)
     mochila.clear()
 }
 
-method artefactosEnPosesion() =
-    self.mochila() + castilloDePiedra.artefactosAlmacenados()
-
+method artefactosEnPosesion() {
+    return mochila.union(self.artefactosEnCastillo())
+} 
 
 
 }

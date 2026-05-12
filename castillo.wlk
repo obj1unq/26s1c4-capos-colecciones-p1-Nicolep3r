@@ -1,10 +1,10 @@
 object castilloDePiedra {
-    const artefactosAlmacenados = []
-
+    const artefactosAlmacenados = #{}
 
 
     method guardarArtefacto(mochila){
-        artefactosAlmacenados.addAll(mochila)
+    //    artefactosAlmacenados.union(mochila)
+        mochila.forEach({ nuevoArtefacto => artefactosAlmacenados.add(nuevoArtefacto) })
     //   artefactosAlmacenados += artefacto
     }
 
